@@ -4,17 +4,18 @@
   --ion-toolbar-background: var(--ion-color-dark-shade);
 
   ion-alert {
+    --ion-background-color: var(--ion-color-light);
+    --ion-color-primary: var(--ion-color-secondary) !important;
     .alert-title,
-    .alert-sub-title,
-    .alert-message {
+    .alert-sub-title {
       color: var(--ion-color-dark);
+    }
+    .alert-message {
+      color: var(--ion-color-dark-tint);
     }
     .alert-button {
       color: var(--ion-color-secondary);
     }
-  }
-  ion-alert {
-    --ion-color-primary: var(--ion-color-secondary) !important;
   }
   ion-loading ion-spinner {
     --spinner-color: var(--ion-color-secondary);
@@ -49,6 +50,7 @@
     }
     ion-item {
       --background-activated: var(--ion-color-primary);
+      --background-hover: var(--ion-color-primary);
     }
   }
   ion-button {
@@ -62,5 +64,10 @@
     padding-top: 5px;
     padding-right: 0;
     padding-bottom: 5px;
+  }
+
+  ion-split-pane.split-pane-visible > ion-menu {
+    width: 28%;
+    max-width: 400px !important;
   }
 }

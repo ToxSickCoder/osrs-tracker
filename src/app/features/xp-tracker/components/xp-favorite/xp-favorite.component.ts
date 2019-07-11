@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { forkJoin, Observable, throwError } from 'rxjs';
-import { catchError, delay, finalize, retry, tap } from 'rxjs/operators';
+import { catchError, delay, finalize, retryWhen, take, tap } from 'rxjs/operators';
 import { AppRoute } from 'src/app/app-routing.routes';
 import { Hiscore } from 'src/app/services/hiscores/hiscore.model';
 import { HiscoresService } from 'src/app/services/hiscores/hiscores.service';
@@ -14,6 +15,7 @@ import { XpTrackerRoute } from '../../xp-tracker.routes';
   selector: 'xp-favorite',
   templateUrl: './xp-favorite.component.html',
   styleUrls: ['./xp-favorite.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class XpFavoriteComponent implements OnInit {
   @Input() player: string;
@@ -23,6 +25,7 @@ export class XpFavoriteComponent implements OnInit {
 
   hiscore: Hiscore;
   gains?: string;
+  typeImageUrl: string;
 
   loading = true;
 
@@ -30,7 +33,8 @@ export class XpFavoriteComponent implements OnInit {
     private hiscoreProvider: HiscoresService,
     private storageService: StorageService,
     private navCtrl: NavController,
-    private xpProvider: XpService
+    private xpProvider: XpService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -41,36 +45,36 @@ export class XpFavoriteComponent implements OnInit {
     return this.navCtrl.navigateForward([AppRoute.XpTracker, XpTrackerRoute.View, this.player]);
   }
 
-  getData(): Observable<[Xp[], Hiscore, Hiscore]> {
+  getData(): Observable<[Xp[], Hiscore]> {
     this.loading = true;
     return forkJoin([
       this.xpProvider.getXpFor(this.player, 1),
-      this.hiscoreProvider.getHiscore(this.player),
       this.hiscoreProvider.getHiscoreAndType(this.player),
     ]).pipe(
-      finalize(() => (this.loading = false)),
+      finalize(() => {
+        this.loading = false;
+        this.changeDetectorRef.markForCheck();
+      }),
       catchError(err => {
         if (err.status === 404) {
           this.notFound.emit();
         }
         return throwError(err);
       }),
-      tap(([xp, hiscore, typedHiscore]) => {
-        this.hiscore = {
-          ...hiscore,
-          player: typedHiscore.player,
-        };
-        this.gains = this.xpProvider.calcXpGains(xp, hiscore)[0].xp.skills[0].exp;
+      tap(([xp, typedHiscore]) => {
+        this.hiscore = typedHiscore;
+        this.gains = this.xpProvider.calcXpGains(xp, typedHiscore)[0].xp.skills[0].exp;
+        this.typeImageUrl = `./assets/imgs/player_types/${this.hiscore.player.deIroned ? 'de_' : ''}${
+          this.hiscore.player.playerType
+        }.png`;
       }),
-      delay(300),
-      retry(2)
+      retryWhen(errors =>
+        errors.pipe(
+          delay(1000),
+          take(2)
+        )
+      )
     );
-  }
-
-  get typeImageUrl(): string {
-    return this.hiscore
-      ? `./assets/imgs/player_types/${this.hiscore.player.deIroned ? 'de_' : ''}${this.hiscore.player.playerType}.png`
-      : '';
   }
 
   async deleteItem(): Promise<void> {

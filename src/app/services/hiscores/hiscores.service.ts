@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of, throwError } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { NativeHttp } from 'src/app/core/native-http/nativeHttp';
 import { environment } from 'src/environments/environment';
 import { XpService } from '../xp/xp.service';
@@ -54,7 +54,7 @@ export class HiscoresService {
   getHiscoreAndType(username: string): Observable<Hiscore> {
     return this.httpClient.get(`${environment.API_GEPT}/player/${username}`, { observe: 'response' }).pipe(
       catchError(err => of(err)),
-      mergeMap(response => {
+      switchMap(response => {
         if (response.status === 200) {
           const player = response.body as Player;
           const hoursSinceCheck = (Date.now() - new Date(player.lastChecked!).getTime()) / 36e5;

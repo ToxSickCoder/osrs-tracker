@@ -1,24 +1,25 @@
-@import "~@ionic/angular/css/core.css";
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 ion-refresher {
-    height: 70px;
-    padding-top: 10px;
+  height: 70px;
+  padding-top: 10px;
 }
 
 ion-list {
   padding: 0 !important;
 }
 
-.alert-checkbox-group, .alert-radio-group {
-  max-height: 350px !important;
+.alert-checkbox-group,
+.alert-radio-group {
+  max-height: 360px !important;
 }
 
 ion-card {
@@ -60,9 +61,9 @@ ion-item[item-result] {
 }
 .positive {
   color: #00ff00;
-  text-shadow: 1px 1px rgba(0,0,0,0.4);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }
 .negative {
   color: #ff0000;
-  text-shadow: 1px 1px rgba(0,0,0,0.4);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
 }

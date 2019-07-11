@@ -1,36 +1,25 @@
 <ion-item-sliding>
   <ion-item item-result [button]="true" [detail]="true" color="primary" (click)="goToXp()">
     <ion-label class="description">
-      <ion-row align-items-center>
-        <ion-col size="auto">
-          <h2 text-capitalize>{{ player }}</h2>
-        </ion-col>
-      </ion-row>
+      <h2 text-capitalize>{{ player }}</h2>
     </ion-label>
     <ion-row slot="end" class="details" align-items-center justify-content-end>
       <ion-col>
         <ion-row align-items-center>
-          <img *ngIf="hiscore?.player.dead" src="./assets/imgs/player_types/dead.png" />
-          <img *ngIf="hiscore?.player.playerType !== 'normal'" [src]="typeImageUrl" />
+          <img *ngIf="!loading && hiscore?.player.dead" src="./assets/imgs/player_types/dead.png" />
+          <img *ngIf="!loading && hiscore?.player.playerType !== 'normal'" [src]="typeImageUrl" />
         </ion-row>
       </ion-col>
       <ng-template [ngIf]="loading" [ngIfElse]="doneLoading">
         <ion-spinner color="dark"></ion-spinner>
       </ng-template>
       <ng-template #doneLoading>
-        <ng-template [ngIf]="!!gains" [ngIfElse]="gainsError">
-          <ion-col size="auto">
-            <span class="gains">+ {{ gains | numberFormat }} XP</span>
-          </ion-col>
-          <ion-col size="auto">
-            <img src="./assets/imgs/skills/1.gif" />
-          </ion-col>
-        </ng-template>
-        <ng-template #gainsError>
-          <ion-col size="auto">
-            ERROR
-          </ion-col>
-        </ng-template>
+        <ion-col size="auto">
+          <span class="gains">+ {{ gains | numberFormat }} XP</span>
+        </ion-col>
+        <ion-col size="auto">
+          <img src="./assets/imgs/skills/1.gif" />
+        </ion-col>
       </ng-template>
     </ion-row>
   </ion-item>
