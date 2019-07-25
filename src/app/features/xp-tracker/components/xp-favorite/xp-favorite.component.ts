@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { catchError, delay, finalize, retryWhen, take, tap } from 'rxjs/operators';

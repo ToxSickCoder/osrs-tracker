@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { IonMenu, NavController, Platform } from '@ionic/angular';
 import { filter } from 'rxjs/operators';
@@ -32,7 +32,8 @@ export class AppComponent implements OnInit {
     private newsProvider: NewsService,
     private platform: Platform,
     private router: Router,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private ngZone: NgZone
   ) {}
   @ViewChild(IonMenu, { static: true }) menu: IonMenu;
 
@@ -105,21 +106,23 @@ export class AppComponent implements OnInit {
   }
 
   private backButtonLogic(): void {
-    this.platform.backButton.subscribeWithPriority(1, async () => {
+    this.platform.backButton.subscribeWithPriority(1, () => {
       const segments = this.router.url.substr(1).split('/');
-      if (this.alertManager.isDialogOpen()) {
-        this.alertManager.close();
-      } else if (await this.menu.isOpen()) {
-        this.menu.close();
-      } else if (segments.includes(AppRoute.XpTracker) && segments.length > 1) {
-        this.navCtrl.navigateBack(AppRoute.XpTracker);
-      } else if (segments.length > 1) {
-        this.navCtrl.back({ animated: true });
-      } else if (!this.router.isActive(AppRoute.Home, false)) {
-        this.navCtrl.navigateRoot(AppRoute.Home, { animated: true, animationDirection: 'back' });
-      } else {
-        (navigator as any)['app'].exitApp();
-      }
+      this.ngZone.run(async () => {
+        if (this.alertManager.isDialogOpen()) {
+          this.alertManager.close();
+        } else if (await this.menu.isOpen()) {
+          this.menu.close();
+        } else if (segments.includes(AppRoute.XpTracker) && segments.length > 1) {
+          this.navCtrl.navigateBack(AppRoute.XpTracker);
+        } else if (segments.length > 1) {
+          this.navCtrl.back({ animated: true });
+        } else if (!this.router.isActive(AppRoute.Home, false)) {
+          this.navCtrl.navigateRoot(AppRoute.Home, { animated: true, animationDirection: 'back' });
+        } else {
+          (navigator as any)['app'].exitApp();
+        }
+      });
     });
   }
 }
