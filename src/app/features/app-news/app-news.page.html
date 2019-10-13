@@ -12,7 +12,7 @@
     <ion-refresher-content pullingText="Pull to refresh" refreshingText="Refreshing..."></ion-refresher-content>
   </ion-refresher>
 
-  <div *ngIf="items.length === 0" text-center margin-top>
+  <div *ngIf="items.length === 0" class="ion-text-center ion-margin-top">
     <ion-spinner></ion-spinner>
     <p>Loading news...</p>
   </div>
@@ -30,8 +30,7 @@
           size="small"
           color="dark"
           shape="round"
-          no-padding
-          no-margin
+          class="ion-no-padding ion-no-margin"
           (click)="upvote(item.id)"
           class="upvotes"
           [ngClass]="{ voted: item.vote > 0 }"
@@ -43,8 +42,7 @@
           size="small"
           color="dark"
           shape="round"
-          no-padding
-          no-margin
+          class="ion-no-padding ion-no-margin"
           (click)="downvote(item.id)"
           class="downvotes"
           [ngClass]="{ voted: item.vote < 0 }"

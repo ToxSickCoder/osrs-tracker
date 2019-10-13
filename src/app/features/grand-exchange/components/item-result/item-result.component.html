@@ -11,18 +11,18 @@
         <small>{{ item?.description }}</small>
       </div>
     </ion-label>
-    <ion-row slot="end" class="details" align-items-center justify-content-end>
+    <ion-row slot="end" class="details ion-align-items-center ion-justify-content-end">
       <ng-template [ngIf]="loading" [ngIfElse]="doneLoading">
         <ion-spinner color="dark"></ion-spinner>
       </ng-template>
       <ng-template #doneLoading>
         <ion-col>
-          <ion-row align-items-center justify-content-end>
+          <ion-row class="ion-align-items-center ion-justify-content-end">
             <div>
               <small class="price">{{ item?.current }} gp</small>
             </div>
           </ion-row>
-          <ion-row align-items-center justify-content-end>
+          <ion-row class="ion-align-items-center ion-justify-content-end">
             <div [class]="item?.trendClass">
               <small>{{ item?.today !== '0' ? item?.today + ' gp' : '-' }} </small>
             </div>
@@ -34,7 +34,7 @@
 
   <ion-item-options (ionSwipe)="deleteItem()">
     <ion-item-option slot="icon-only" (click)="deleteItem()" expandable color="danger">
-      <ion-icon name="trash" size="large" padding-start padding-end></ion-icon>
+      <ion-icon name="trash" size="large" class="ion-padding-start ion-padding-end"></ion-icon>
     </ion-item-option>
   </ion-item-options>
 </ion-item-sliding>

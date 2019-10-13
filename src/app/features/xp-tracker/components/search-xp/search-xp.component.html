@@ -4,7 +4,7 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-item no-padding color="secondary">
+    <ion-item class="ion-no-padding" color="secondary">
       <ion-input
         type="text"
         placeholder="Enter player name"
@@ -13,7 +13,7 @@
         (keyup.enter)="searchXp(search.value)"
       ></ion-input>
     </ion-item>
-    <ion-button no-margin color="secondary" expand="full" (click)="searchXp(search.value)">
+    <ion-button class="ion-no-margin" color="secondary" expand="full" (click)="searchXp(search.value)">
       <ion-icon slot="start" name="search"></ion-icon>
       Search
     </ion-button>
@@ -22,7 +22,7 @@
 
 <ion-card *ngIf="favoriteXp?.length > 0" [@favoriteShrink]>
   <ion-list lines="full" #favoriteList>
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Favorites</ion-label>
     </ion-list-header>
     <xp-favorite
@@ -37,7 +37,7 @@
 
 <ion-card *ngIf="recentXp?.length > 0" [@favoriteShrink]>
   <ion-list lines="full" #recentList>
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Recent</ion-label>
     </ion-list-header>
     <xp-favorite

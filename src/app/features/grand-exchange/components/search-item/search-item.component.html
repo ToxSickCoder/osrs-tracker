@@ -1,11 +1,11 @@
 <ion-card>
   <ion-card-header>
-    <ion-row align-items-center>
-      <ion-col no-padding>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-no-padding">
         <ion-card-title>Find item</ion-card-title>
       </ion-col>
-      <ion-col size="auto" no-padding>
-        <ion-row align-items-center class="compare">
+      <ion-col size="auto" class="ion-no-padding">
+        <ion-row class="compare ion-align-items-center">
           compare
           <ion-toggle color="secondary" [(ngModel)]="compare"></ion-toggle>
         </ion-row>
@@ -13,7 +13,7 @@
     </ion-row>
   </ion-card-header>
   <ion-card-content>
-    <ion-item no-padding color="secondary">
+    <ion-item class="ion-no-padding" color="secondary">
       <ion-input
         [(ngModel)]="itemName"
         placeholder="Enter item name"
@@ -21,7 +21,7 @@
         clearInput
       ></ion-input>
     </ion-item>
-    <ion-item no-padding color="secondary" *ngIf="compare">
+    <ion-item class="ion-no-padding" color="secondary" *ngIf="compare">
       <ion-input
         [(ngModel)]="compareItemName"
         placeholder="Enter compare item name"
@@ -30,7 +30,7 @@
       ></ion-input>
     </ion-item>
     <ion-button
-      no-margin
+      class="ion-no-margin"
       (click)="compare ? compareItem() : searchItem()"
       type="submit"
       expand="full"
@@ -44,7 +44,7 @@
 
 <ion-card *ngIf="favoriteItems?.length > 0" [@favoriteShrink]>
   <ion-list lines="full">
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Favorites</ion-label>
     </ion-list-header>
     <item-result
@@ -59,7 +59,7 @@
 
 <ion-card *ngIf="recentItems?.length > 0" [@favoriteShrink]>
   <ion-list lines="full">
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Recent</ion-label>
     </ion-list-header>
     <item-result

@@ -1,11 +1,11 @@
 <ion-item-sliding>
   <ion-item item-result [button]="true" [detail]="true" color="primary" (click)="goToXp()">
     <ion-label class="description">
-      <h2 text-capitalize>{{ player }}</h2>
+      <h2 class="ion-text-capitalize">{{ player }}</h2>
     </ion-label>
-    <ion-row slot="end" class="details" align-items-center justify-content-end>
+    <ion-row slot="end" class="details ion-align-items-center ion-justify-content-end">
       <ion-col>
-        <ion-row align-items-center>
+        <ion-row class="ion-align-items-center">
           <img *ngIf="!loading && hiscore?.player.dead" src="./assets/imgs/player_types/dead.png" />
           <img *ngIf="!loading && hiscore?.player.playerType !== 'normal'" [src]="typeImageUrl" />
         </ion-row>
@@ -26,7 +26,7 @@
 
   <ion-item-options (ionSwipe)="deleteItem()">
     <ion-item-option slot="icon-only" (click)="deleteItem()" expandable color="danger">
-      <ion-icon name="trash" size="large" padding-start padding-end></ion-icon>
+      <ion-icon name="trash" size="large" class="ion-padding-start ion-padding-end"></ion-icon>
     </ion-item-option>
   </ion-item-options>
 </ion-item-sliding>

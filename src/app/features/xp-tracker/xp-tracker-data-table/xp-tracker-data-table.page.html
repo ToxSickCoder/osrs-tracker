@@ -1,14 +1,14 @@
 <ion-content>
-  <ion-refresher pullMin="70" pullMax="250" pullFactor="0.5" (ionRefresh)="doRefresh()">
+  <ion-refresher slot="fixed" pullMin="70" pullMax="250" pullFactor="0.5" (ionRefresh)="doRefresh()">
     <ion-refresher-content pullingText="Pull to refresh" refreshingText="Refreshing..."></ion-refresher-content>
   </ion-refresher>
 
   <ion-card *ngFor="let gains of dataTable; trackBy: trackByXpDate; let index = index">
-    <ion-card-content no-padding>
-      <ion-list-header no-margin color="secondary">
+    <ion-card-content class="ion-no-padding">
+      <ion-list-header class="ion-no-margin" color="secondary">
         {{ getFormattedDate(gains.date, index) }}
       </ion-list-header>
-      <ion-grid no-padding>
+      <ion-grid class="ion-no-padding">
         <ion-row *ngIf="gains.xp.skills.length === 0">
           <ion-col>
             <div class="no-gains">No experience gained.</div>

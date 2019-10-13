@@ -1,11 +1,11 @@
 <ion-card>
   <ion-card-content>
-    <div *ngIf="loading" class="loading-spinner" text-center>
+    <div *ngIf="loading" class="loading-spinner ion-text-center">
       <ion-spinner></ion-spinner>
       <p>Getting graph...</p>
     </div>
     <div *ngIf="!loading">
-      <ion-row no-padding>
+      <ion-row class="ion-no-padding">
         <ion-col>
           <ion-button
             (click)="updateData(180)"
@@ -16,7 +16,7 @@
           >
             180 days
           </ion-button>
-          <div *ngFor="let item of items" class="trend" [ngClass]="item.day180.trend" text-center>
+          <div *ngFor="let item of items" class="trend ion-text-center" [ngClass]="item.day180.trend">
             <br *ngIf="items.length > 1" />
             <div>{{ item.day180.change }}</div>
           </div>
@@ -31,7 +31,7 @@
           >
             90 days
           </ion-button>
-          <div *ngFor="let item of items" class="trend" text-center>
+          <div *ngFor="let item of items" class="trend ion-text-center">
             <div class="item-name" *ngIf="items.length > 1">{{ item.name }}</div>
             <div [ngClass]="item.day90.trend">{{ item.day90.change }}</div>
           </div>
@@ -46,7 +46,7 @@
           >
             30 days
           </ion-button>
-          <div *ngFor="let item of items" class="trend" [ngClass]="item.day30.trend" text-center>
+          <div *ngFor="let item of items" class="trend ion-text-center" [ngClass]="item.day30.trend">
             <br *ngIf="items.length > 1" />
             <div>{{ item.day30.change }}</div>
           </div>

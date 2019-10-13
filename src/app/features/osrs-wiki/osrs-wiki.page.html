@@ -13,7 +13,7 @@
       <ion-card-title>Search</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item no-padding color="secondary">
+      <ion-item class="ion-no-padding" color="secondary">
         <ion-input
           placeholder="Enter search term"
           (keyup.enter)="searchWiki(search.value)"
@@ -21,7 +21,13 @@
           #search
         ></ion-input>
       </ion-item>
-      <ion-button no-margin (click)="searchWiki(search.value)" type="submit" expand="full" color="secondary">
+      <ion-button
+        class="ion-no-margin"
+        (click)="searchWiki(search.value)"
+        type="submit"
+        expand="full"
+        color="secondary"
+      >
         <ion-icon slot="start" name="search"></ion-icon>
         Search
       </ion-button>
@@ -31,7 +37,7 @@
   <ion-card class="search-results" *ngIf="searchResults.length > 0">
     <ion-card-content>
       <ion-list lines="full">
-        <ion-list-header no-margin color="secondary">
+        <ion-list-header class="ion-no-margin" color="secondary">
           <ion-label>Results</ion-label>
         </ion-list-header>
         <ion-item

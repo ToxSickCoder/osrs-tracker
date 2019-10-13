@@ -1,11 +1,11 @@
 <ion-card>
   <ion-card-header>
-    <ion-row align-items-center>
-      <ion-col no-padding>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="ion-no-padding">
         <ion-card-title>Find player</ion-card-title>
       </ion-col>
-      <ion-col size="auto" no-padding>
-        <ion-row align-items-center class="compare">
+      <ion-col size="auto" class="ion-no-padding">
+        <ion-row class="compare ion-align-items-center">
           compare
           <ion-toggle color="secondary" [(ngModel)]="compare"></ion-toggle>
         </ion-row>
@@ -14,7 +14,7 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-item color="secondary" no-padding>
+    <ion-item color="secondary" class="ion-no-padding">
       <ion-input
         type="text"
         [(ngModel)]="playerName"
@@ -24,7 +24,7 @@
         clearInput
       ></ion-input>
     </ion-item>
-    <ion-item color="secondary" no-padding *ngIf="compare">
+    <ion-item color="secondary" class="ion-no-padding" *ngIf="compare">
       <ion-input
         type="text"
         [(ngModel)]="compareName"
@@ -34,7 +34,12 @@
         clearInput
       ></ion-input>
     </ion-item>
-    <ion-button no-margin color="secondary" expand="full" (click)="compare ? comparePlayers() : searchPlayer()">
+    <ion-button
+      class="ion-no-margin"
+      color="secondary"
+      expand="full"
+      (click)="compare ? comparePlayers() : searchPlayer()"
+    >
       <ion-icon slot="start" [name]="compare ? 'swap' : 'search'"></ion-icon>
       {{ compare ? 'Compare' : 'Search' }}
     </ion-button>
@@ -43,7 +48,7 @@
 
 <ion-card *ngIf="favoriteHiscores?.length > 0" [@favoriteShrink]>
   <ion-list lines="full">
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Favorites</ion-label>
     </ion-list-header>
     <hiscore-favorite
@@ -58,7 +63,7 @@
 
 <ion-card *ngIf="recentHiscores?.length > 0" [@favoriteShrink]>
   <ion-list lines="full">
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       <ion-label>Recent</ion-label>
     </ion-list-header>
     <hiscore-favorite

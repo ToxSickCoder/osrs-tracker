@@ -16,22 +16,22 @@
 <ion-content>
   <ion-card>
     <ion-card-content class="pr-sm">
-      <ion-grid no-padding>
+      <ion-grid class="ion-no-padding">
         <ion-row>
-          <ion-col size="9" class="br pr" no-padding text-center>
-            <h1 no-margin>{{ item.name }}</h1>
+          <ion-col size="9" class="br pr ion-no-padding ion-text-center">
+            <h1 class="no-margin">{{ item.name }}</h1>
             <img class="item-icon" [src]="item.icon" />
             <h2>Description:</h2>
             <p>{{ item.description }}</p>
           </ion-col>
-          <ion-col size="3" no-padding align-items-stretch>
-            <ion-row align-items-center text-center class="h-50">
+          <ion-col size="3" class="ion-no-padding ion-align-items-stretch">
+            <ion-row class="ion-align-items-center ion-text-center h-50">
               <ion-col>
                 <h2>Price</h2>
                 <p class="coins number"><img src="./assets/imgs/coins.png" /> {{ item.current }}</p>
               </ion-col>
             </ion-row>
-            <ion-row align-items-center text-center class="h-50 bt">
+            <ion-row class="ion-align-items-center ion-text-center h-50 bt">
               <ion-col>
                 <h2>Today</h2>
                 <p class="number" [ngClass]="item.trendClass">

@@ -4,7 +4,7 @@
   </ion-refresher>
 
   <ion-card *ngFor="let log of logs; trackBy: trackByXpDate; let index = index">
-    <ion-list-header no-margin color="secondary">
+    <ion-list-header class="ion-no-margin" color="secondary">
       {{ getFormattedDate(log.date) }}
     </ion-list-header>
     <ion-item

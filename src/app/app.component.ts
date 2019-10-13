@@ -10,15 +10,18 @@ import { NewsService } from './services/news/news.service';
 import { SettingsService } from './services/settings/settings.service';
 
 class Page {
+  public active = false;
+
   constructor(
     public id: number,
     public icon: string,
     public title: string,
-    public active: boolean,
-    public route?: string,
-    public badge?: string,
-    public action?: () => void
-  ) {}
+    public options: {
+      route?: string,
+      badge?: string,
+      action?: () => void
+    }
+  ) { }
 }
 
 @Component({
@@ -34,24 +37,20 @@ export class AppComponent implements OnInit {
     private router: Router,
     private settingsService: SettingsService,
     private ngZone: NgZone
-  ) {}
+  ) { }
   @ViewChild(IonMenu, { static: true }) menu: IonMenu;
 
   pages: Page[] = [
-    new Page(0, 'md-home', 'Home', false, AppRoute.Home),
-    new Page(1, 'md-today', 'App News', false, AppRoute.AppNews, undefined, () => this.checkForNewAppNews()),
-    new Page(2, 'md-trending-up', 'Grand Exchange', false, AppRoute.GrandExchange),
-    new Page(3, 'md-trophy', 'Hiscores', false, AppRoute.Hiscores),
-    new Page(4, 'md-podium', 'XP Tracker', false, AppRoute.XpTracker),
-    new Page(5, 'md-wikipedia', 'OSRS Wiki', false, AppRoute.OSRSWiki),
-    new Page(5, 'md-discord', 'Discord', false, undefined, undefined, () =>
-      window.open('https://discord.gg/k7E6WZj', '_system')
-    ),
-    new Page(5, 'md-star', 'Rate App', false, undefined, undefined, () =>
-      window.open('market://details?id=com.toxsickproductions.geptv2', '_system')
-    ),
-    new Page(5, 'md-wallet', 'Support OSRS Tracker', false, AppRoute.SupportMe),
-    new Page(6, 'md-settings', 'Settings', false, AppRoute.Settings),
+    new Page(0, 'md-home', 'Home', { route: AppRoute.Home }),
+    new Page(1, 'md-today', 'App News', { route: AppRoute.AppNews, action: () => this.checkForNewAppNews() }),
+    new Page(2, 'md-trending-up', 'Grand Exchange', { route: AppRoute.GrandExchange }),
+    new Page(3, 'md-trophy', 'Hiscores', { route: AppRoute.Hiscores }),
+    new Page(4, 'md-podium', 'XP Tracker', { route: AppRoute.XpTracker }),
+    new Page(5, 'md-wikipedia', 'OSRS Wiki', { route: AppRoute.OSRSWiki }),
+    new Page(5, 'md-discord', 'Discord', { action: () => window.open('https://discord.gg/k7E6WZj', '_system') }),
+    new Page(5, 'md-star', 'Rate App', { action: () => window.open('market://details?id=com.toxsickproductions.geptv2', '_system') }),
+    new Page(5, 'md-wallet', 'Support OSRS Tracker', { route: AppRoute.SupportMe }),
+    new Page(6, 'md-settings', 'Settings', { route: AppRoute.Settings }),
   ];
 
   readonly production = environment.production;
@@ -61,11 +60,11 @@ export class AppComponent implements OnInit {
   }
 
   linkClicked(page: Page): void {
-    if (page.action) {
-      page.action();
+    if (page.options.action) {
+      page.options.action();
     }
-    if (page.route) {
-      this.navCtrl.navigateRoot(page.route, { animated: false });
+    if (page.options.route) {
+      this.navCtrl.navigateRoot(page.options.route, { animated: false });
     }
   }
 
@@ -87,9 +86,9 @@ export class AppComponent implements OnInit {
 
   private async checkForNewAppNews(): Promise<void> {
     if (await this.newsProvider.isNewAppArticleAvailable()) {
-      this.pages.filter(page => page.title === 'App News')[0].badge = 'NEW';
+      this.pages.filter(page => page.title === 'App News')[0].options.badge = 'NEW';
     } else {
-      this.pages.filter(page => page.title === 'App News')[0].badge = undefined;
+      this.pages.filter(page => page.title === 'App News')[0].options.badge = undefined;
     }
   }
 
@@ -99,7 +98,7 @@ export class AppComponent implements OnInit {
         const activePage = this.router.url.substr(1).split('/')[0];
         this.pages = this.pages.map(page => ({
           ...page,
-          active: activePage === page.route,
+          active: activePage === page.options.route,
         }));
       },
     });

@@ -42,7 +42,7 @@ export class XpFavoriteComponent implements OnInit {
     private navCtrl: NavController,
     private xpProvider: XpService,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getData().subscribe();
@@ -54,6 +54,8 @@ export class XpFavoriteComponent implements OnInit {
 
   getData(): Observable<[Xp[], Hiscore]> {
     this.loading = true;
+    this.changeDetectorRef.markForCheck();
+
     return forkJoin([
       this.xpProvider.getXpFor(this.player, 1),
       this.hiscoreProvider.getHiscoreAndType(this.player),
@@ -73,7 +75,7 @@ export class XpFavoriteComponent implements OnInit {
         this.gains = this.xpProvider.calcXpGains(xp, typedHiscore)[0].xp.skills[0].exp;
         this.typeImageUrl = `./assets/imgs/player_types/${this.hiscore.player.deIroned ? 'de_' : ''}${
           this.hiscore.player.playerType
-        }.png`;
+          }.png`;
       }),
       retryWhen(errors =>
         errors.pipe(

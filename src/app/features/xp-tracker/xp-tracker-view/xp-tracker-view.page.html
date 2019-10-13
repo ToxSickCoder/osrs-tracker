@@ -4,12 +4,12 @@
       <ion-back-button [defaultHref]="AppRoute.XpTracker"></ion-back-button>
     </ion-buttons>
     <ion-title class="pr-none">
-      <ion-row align-items-center>
+      <ion-row class="ion-align-items-center">
         <ion-col size="auto">
-          <ion-label text-capitalize>{{ username }}</ion-label>
+          <ion-label class="ion-text-capitalize">{{ username }}</ion-label>
         </ion-col>
         <ion-col>
-          <ion-row align-items-center>
+          <ion-row class="ion-align-items-center">
             <img *ngIf="hiscore.player.dead" class="icon" src="./assets/imgs/player_types/dead.png" />
             <img *ngIf="hiscore.player.playerType !== 'normal'" class="icon" [src]="getTypeImageUrl()" />
           </ion-row>

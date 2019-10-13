@@ -1,8 +1,8 @@
 <nerd-statistics *ngIf="!production"></nerd-statistics>
 
 <ion-app>
-  <ion-split-pane>
-    <ion-menu side="start">
+  <ion-split-pane contentId="main-outlet">
+    <ion-menu side="start" contentId="main-outlet">
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu</ion-title>
@@ -21,13 +21,13 @@
             >
               <ion-icon slot="start" [name]="page.icon"></ion-icon>
               {{ page.title }}
-              <ion-badge margin-start color="light">{{ page.badge }}</ion-badge>
+              <ion-badge class="ion-margin-start" color="light">{{ page.options.badge }}</ion-badge>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
 
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet id="main-outlet"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
